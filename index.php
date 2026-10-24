@@ -12,7 +12,7 @@ $goods_list = [
     ["name" => "Маска Oakley Canopy", "category" => 5, "price" => 5400, "imgUrl" => "img/lot-6.jpg"],
 ];
 
-function formatPrice(int $price): string
+function format_price(int $price): string
 {
     return number_format(ceil($price), 0, '', ' ') . " ₽";
 }

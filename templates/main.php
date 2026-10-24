@@ -34,7 +34,7 @@
                         <div class="lot__rate">
                             <span class="lot__amount">Стартовая цена</span>
                             <span class="lot__cost">
-                                <?= formatPrice($good["price"]) ?>
+                                <?= format_price($good["price"]) ?>
                             </span>
                         </div>
                         <div class="lot__timer timer">
