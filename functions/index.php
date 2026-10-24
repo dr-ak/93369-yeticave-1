@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 function format_price(int $price): string
 {
     return number_format(ceil($price), 0, '', ' ') . " ₽";

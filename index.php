@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 require_once 'helpers.php';
 require_once 'functions/index.php';
 
