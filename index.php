@@ -1,6 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 require_once 'helpers.php';
+require_once 'functions/index.php';
 
 $categories = ["Доски и лыжи", "Крепления", "Ботинки", "Одежда", "Инструменты", "Разное"];
 $goods_list = [
@@ -12,19 +15,9 @@ $goods_list = [
     ["name" => "Маска Oakley Canopy", "category" => 5, "price" => 5400, "imgUrl" => "img/lot-6.jpg"],
 ];
 
-function format_price(int $price): string
-{
-    return number_format(ceil($price), 0, '', ' ') . " ₽";
-}
-
-function esc(string $value)
-{
-    return htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
-}
-
 $title = 'Главна';
-$content = include_template('main.php', ['categories' => $categories, 'goods_list' => $goods_list]);
+$content = include_template('main.php', compact('categories', 'goods_list'));
 
-$layout = include_template('layout.php', ['title' => $title, 'content' => $content]);
+$layout = include_template('layout.php', compact('title', 'content'));
 
 print($layout);
