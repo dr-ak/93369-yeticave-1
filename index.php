@@ -23,8 +23,8 @@ function esc(string $value)
 }
 
 $title = 'Главна';
-$content = include_template('main.php', ['categories' => $categories, 'goods_list' => $goods_list]);
+$content = include_template('main.php', compact('categories', 'goods_list'));
 
-$layout = include_template('layout.php', ['title' => $title, 'content' => $content]);
+$layout = include_template('layout.php', compact('title', 'content'));
 
 print($layout);

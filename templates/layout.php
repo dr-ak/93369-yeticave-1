@@ -13,7 +13,7 @@ $user_name = 'Александр'; // укажите здесь ваше имя
 
 <head>
     <meta charset="UTF-8">
-    <title><?= esc($title); ?></title>
+    <title><?= $title ?></title>
     <link href="../css/normalize.min.css" rel="stylesheet">
     <link href="../css/style.css" rel="stylesheet">
 </head>
@@ -38,7 +38,7 @@ $user_name = 'Александр'; // укажите здесь ваше имя
                     <!-- здесь должен быть PHP код для показа меню и данных пользователя -->
                     <?php if ($is_auth): ?>
                         <div class="user-menu__logged">
-                            <p><?= esc($user_name); ?></p>
+                            <p><?= $user_name ?></p>
                             <a class="user-menu__bets" href="pages/my-bets.html">Мои ставки</a>
                             <a class="user-menu__logout" href="#">Выход</a>
                         </div>
@@ -56,7 +56,7 @@ $user_name = 'Александр'; // укажите здесь ваше имя
             </div>
         </header>
 
-        <main class="container"><?= $content; ?></main>
+        <main class="container"><?= $content ?></main>
     </div>
 
     <footer class="main-footer">
