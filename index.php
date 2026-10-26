@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 require_once 'helpers.php';
 require_once 'functions/index.php';
+require_once 'const.php';
 
 $categories = ["Доски и лыжи", "Крепления", "Ботинки", "Одежда", "Инструменты", "Разное"];
 $goods_list = [
