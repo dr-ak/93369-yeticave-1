@@ -37,9 +37,9 @@
                                 <?= format_price($good["price"]) ?>
                             </span>
                         </div>
-                        <?php $remaining_time = get_time_remiaining($good["expiry_date"]);?>
-                        <div class="lot__timer timer <?= $remaining_time["hours"] < 1 ? "timer--finishing" : "" ?>">
-                            <?= get_view_time($remaining_time)?>
+                        <?php $remaining_time = get_time_remiaining($good["expiry_date"]); ?>
+                        <div class="lot__timer timer <?= $remaining_time[HOURS] < 1 ? "timer--finishing" : "" ?>">
+                            <?= get_view_time($remaining_time) ?>
                         </div>
                     </div>
                 </div>

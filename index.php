@@ -16,7 +16,7 @@ $goods_list = [
     ["name" => "Маска Oakley Canopy", "category" => 5, "price" => 5400, "imgUrl" => "img/lot-6.jpg", "expiry_date" => "2026-11-02"],
 ];
 
-$title = 'Главна';
+$title = 'Главная';
 $content = include_template('main.php', compact('categories', 'goods_list'));
 
 $layout = include_template('layout.php', compact('title', 'content'));
