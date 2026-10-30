@@ -44,11 +44,4 @@ CREATE TABLE IF NOT EXISTS bids (
     FOREIGN KEY (lot_id) REFERENCES lots(id) ON DELETE CASCADE
 );
 
-SELECT 
-    amount,
-    bids.created_at, 
-    users.name
-FROM bids
-JOIN users ON user_id = users.id
-WHERE lot_id = 3
-ORDER BY bids.created_at DESC;
+
