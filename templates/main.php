@@ -1,7 +1,7 @@
 <?php
 
-/** @var \Ds\Map<int, array> $categories List of categories */
-/** @var array $lots_list List of goods */
+/** @var array $categories  List of categories */
+/** @var array $lots_list List of lots */
 
 ?>
 <section class="promo">
