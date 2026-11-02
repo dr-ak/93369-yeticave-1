@@ -1,5 +1,5 @@
 -- список категорий
-INSERT IGNORE INTO categories (name, code) VALUES 
+INSERT IGNORE INTO categories (name, code) VALUES
 ('Доски и лыжи', 'boards'),
 ('Крепления', 'bindings'),
 ('Ботинки', 'boots'),
@@ -8,7 +8,7 @@ INSERT IGNORE INTO categories (name, code) VALUES
 ('Разное', 'other');
 
 -- список пользователей
-INSERT IGNORE INTO users (email, name, password_hash, contacts) VALUES 
+INSERT IGNORE INTO users (email, name, password_hash, contacts) VALUES
 (
     'ivan@example.com',
     'Иван Петров',
@@ -23,7 +23,7 @@ INSERT IGNORE INTO users (email, name, password_hash, contacts) VALUES
 );
 
 -- список объявлений
-INSERT INTO lots (title, description, image_url, start_price, bid_step, end_date, category_id, seller_id) VALUES 
+INSERT INTO lots (title, description, image_url, start_price, bid_step, expiry_date, category_id, seller_id) VALUES
 (
     '2014 Rossignol District Snowboard',
     'Отличный сноуборд для начинающих и прогрессирующих райдеров.',
@@ -85,7 +85,7 @@ INSERT INTO lots (title, description, image_url, start_price, bid_step, end_date
 );
 
 -- ставки для объявлений
-INSERT INTO bids (created_at, amount, user_id, lot_id) VALUES 
+INSERT INTO bids (created_at, amount, user_id, lot_id) VALUES
 ('2026-10-30 09:00:00', 8300, 2, 3),
 ('2026-10-30 11:30:00', 8600, 1, 3),
 ('2026-10-30 14:15:00', 9000, 2, 3),
@@ -96,7 +96,7 @@ INSERT INTO bids (created_at, amount, user_id, lot_id) VALUES
 SELECT name FROM categories;
 
 -- получить самые новые, открытые лоты. Каждый лот должен включать название, стартовую цену, ссылку на изображение, цену, название категории
-SELECT 
+SELECT
     title,
     start_price,
     image_url,
@@ -105,7 +105,7 @@ SELECT
 FROM lots
 JOIN categories ON category_id = categories.id
 LEFT JOIN bids ON lots.id = lot_id
-WHERE end_date > NOW() AND buyer_id IS NULL
+WHERE expiry_date > NOW() AND buyer_id IS NULL
 GROUP BY lots.id
 ORDER BY lots.created_at DESC;
 
@@ -123,9 +123,9 @@ SET title = 'Санки ледянки'
 WHERE id = 1;
 
 -- получить список ставок для лота по его идентификатору с сортировкой по дате
-SELECT 
+SELECT
     amount,
-    bids.created_at, 
+    bids.created_at,
     users.name
 FROM bids
 JOIN users ON user_id = users.id
