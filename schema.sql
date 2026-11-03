@@ -1,12 +1,12 @@
-CREATE DATABASE IF NOT EXISTS ski_auction_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE IF NOT EXISTS yeti_cave_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-USE ski_auction_db;
+USE yeti_cave_db;
 
 CREATE TABLE IF NOT EXISTS categories (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL UNIQUE,
     code VARCHAR(50) NOT NULL UNIQUE
-); 
+);
 
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS users (
     name VARCHAR(128) NOT NULL,
     password_hash VARCHAR(255) NOT NULL,
     contacts TEXT NOT NULL
-); 
+);
 
 CREATE TABLE IF NOT EXISTS lots (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -25,14 +25,14 @@ CREATE TABLE IF NOT EXISTS lots (
     image_url VARCHAR(255) NOT NULL,
     start_price INT NOT NULL,
     bid_step INT NOT NULL,
-    end_date DATETIME NOT NULL,
+    expiry_date DATETIME NOT NULL,
     category_id INT NOT NULL,
     seller_id INT NOT NULL,
     buyer_id INT DEFAULT NULL,
     FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE RESTRICT,
     FOREIGN KEY (seller_id) REFERENCES users(id) ON DELETE RESTRICT,
     FOREIGN KEY (buyer_id) REFERENCES users(id) ON DELETE RESTRICT
-); 
+);
 
 CREATE TABLE IF NOT EXISTS bids (
     id INT AUTO_INCREMENT PRIMARY KEY,

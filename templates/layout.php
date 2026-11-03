@@ -2,6 +2,7 @@
 
 /** @var string $title */
 /** @var string $content */
+/** @var array $categories  List of categories */
 
 $is_auth = rand(0, 1);
 
@@ -63,9 +64,11 @@ $user_name = 'Александр'; // укажите здесь ваше имя
         <nav class="nav">
             <ul class="nav__list container">
                 <!--заполните этот список из массива категорий-->
-                <li class="nav__item">
-                    <a href="pages/all-lots.html">Название категории</a>
-                </li>
+                <?php foreach ($categories as $category): ?>
+                    <li class="nav__item">
+                        <a href="pages/all-lots.html"><?= esc($category["name"]) ?></a>
+                    </li>
+                <?php endforeach; ?>
             </ul>
         </nav>
         <div class="main-footer__bottom container">

@@ -5,20 +5,43 @@ declare(strict_types=1);
 require_once 'helpers.php';
 require_once 'functions/index.php';
 require_once 'const.php';
+require_once 'db.php';
 
-$categories = ["Доски и лыжи", "Крепления", "Ботинки", "Одежда", "Инструменты", "Разное"];
-$lots_list = [
-    ["name" => "2014 Rossignol District Snowboard", "category" => 0, "price" => 10999, "imgUrl" => "img/lot-1.jpg", "expiry_date" => "2026-10-26 06:38"],
-    ["name" => "DC Ply Mens 2016/2017 Snowboard", "category" => 0, "price" => 159999, "imgUrl" => "img/lot-2.jpg", "expiry_date" => "2026-10-29"],
-    ["name" => "Крепления Union Contact Pro 2015 года размер L/XL", "category" => 1, "price" => 8000, "imgUrl" => "img/lot-3.jpg", "expiry_date" => "2026-10-30"],
-    ["name" => "Ботинки для сноуборда DC Mutiny Charcoal", "category" => 2, "price" => 10999, "imgUrl" => "img/lot-4.jpg", "expiry_date" => "2026-10-31"],
-    ["name" => "Куртка для сноуборда DC Mutiny Charcoal", "category" => 3, "price" => 7500, "imgUrl" => "img/lot-5.jpg", "expiry_date" => "2026-11-01"],
-    ["name" => "Маска Oakley Canopy", "category" => 5, "price" => 5400, "imgUrl" => "img/lot-6.jpg", "expiry_date" => "2026-11-02"],
-];
+$link = mysqli_connect(...$config);
+
+if (!$link) {
+    die("Error db connection: " . mysqli_connect_error());
+}
+
+mysqli_set_charset($link, "utf8mb4");
+
+$sql = "SELECT * FROM categories";
+$result = mysqli_query($link, $sql);
+$categories = [];
+
+if ($result) {
+    $categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
+}
+
+$sql = "SELECT title, image_url, start_price, expiry_date, name AS category_name
+        FROM lots
+        JOIN categories ON lots.category_id = categories.id
+        WHERE expiry_date > ?";
+
+$stmt = db_get_prepare_stmt($link, $sql, [date('Y-m-d H:i:s')]);
+mysqli_stmt_execute($stmt);
+
+$result = mysqli_stmt_get_result($stmt);
+
+if ($result) {
+    $lots_list = mysqli_fetch_all($result, MYSQLI_ASSOC);
+}
+
+mysqli_stmt_close($stmt);
 
 $title = 'Главная';
 $content = include_template('main.php', compact('categories', 'lots_list'));
 
-$layout = include_template('layout.php', compact('title', 'content'));
+$layout = include_template('layout.php', compact('title', 'content', 'categories'));
 
 print($layout);
